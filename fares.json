@@ -1,0 +1,30 @@
+{
+  "$comment": "Fare data for the site. After editing, run `npm run token`. README.md explains each field. fuel.price is the current average fuel price per liter; it picks the fare row, so update it (and fuel.asOf) when prices change.",
+  "iss": "City Government of Panabo",
+  "ref": "City Ordinance No. 43-2023",
+  "fuel": { "price": 85, "asOf": "2026-10-07" },
+  "discountLabel": "Student / Senior / PWD",
+  "night": { "from": "22:00", "to": "05:00" },
+  "notes": ["Rates apply within the first 3 kilometers from the City Museum."],
+  "vehicles": [
+    {
+      "id": "tricycle",
+      "name": "Tricycle",
+      "baseKm": 3,
+      "addPerKm": { "regular": 2, "discounted": 2 },
+      "addIfAlone": 10,
+      "addAtNight": 15,
+      "fares": [
+        { "fuelFrom": 20, "regular": 10, "discounted": 8 },
+        { "fuelFrom": 30, "regular": 12, "discounted": 10 },
+        { "fuelFrom": 40, "regular": 13, "discounted": 11 },
+        { "fuelFrom": 50, "regular": 14, "discounted": 12 },
+        { "fuelFrom": 60, "regular": 15, "discounted": 13 },
+        { "fuelFrom": 70, "regular": 16, "discounted": 14 },
+        { "fuelFrom": 80, "regular": 17, "discounted": 15 },
+        { "fuelFrom": 90, "regular": 18, "discounted": 16 },
+        { "fuelFrom": 100, "regular": 20, "discounted": 18 }
+      ]
+    }
+  ]
+}
