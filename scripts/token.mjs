@@ -25,4 +25,5 @@ const updated = /^VITE_FARE_TOKEN=.*$/m.test(env)
 await writeFile(envUrl, updated)
 
 console.log(`Saved VITE_FARE_TOKEN in .env (Matrix ID ${matrixId}, ${status}).`)
-console.log('Restart `npm run dev` or rebuild the site to use it.')
+console.log('Local: restart `npm run dev` to use it.')
+console.log('Vercel: copy the VITE_FARE_TOKEN value from .env into Project → Settings → Environment Variables, then redeploy.')

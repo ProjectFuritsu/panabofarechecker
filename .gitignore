@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local settings. VITE_FARE_TOKEN comes from `npm run token`; on Vercel it is set in the project settings.
+.env

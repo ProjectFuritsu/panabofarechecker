@@ -7,16 +7,21 @@ on a map, or type the distance, and set how many regular and discounted passenge
 Each passenger pays their own fare, so the page shows the fare per passenger and the group total, plus the
 ordinance's full bracket table with the current row highlighted.
 
-There is no database. All fare data lives in one hashed token in `.env`.
+There is no database. All fare data lives in one hashed token, `VITE_FARE_TOKEN`.
 
 ## Updating fares or the fuel price
 
 1. Edit `fares.json`. Usually only `fuel.price` and `fuel.asOf` change.
-2. Run `npm run token`. This writes `VITE_FARE_TOKEN` to `.env`.
-3. Restart `npm run dev`, or run `npm run build` and deploy `dist/`.
+2. Run `npm run token`. This writes `VITE_FARE_TOKEN` to your local `.env`.
+3. Locally: restart `npm run dev`.
+4. On Vercel: open Project → Settings → Environment Variables, set `VITE_FARE_TOKEN` to the new value
+   from `.env`, then redeploy (Deployments → ⋯ → Redeploy). The token is built into the site, so a
+   changed value only shows after a redeploy.
+5. Commit and push `fares.json` so the repo keeps a record of the current rates.
 
-When hosting on Vercel or Netlify, you can set `VITE_FARE_TOKEN` in the dashboard instead of `.env`.
-The token is public data (it is built into the site's JavaScript), so committing `.env` is fine.
+`.env` is not committed to Git; `.env.example` lists the variables it holds. If `VITE_FARE_TOKEN` is
+missing when the site is built, the page shows "Fares are not available". The token is not a secret
+(it ends up in the site's JavaScript), so it is fine to paste into the Vercel dashboard.
 
 ## fares.json fields
 
@@ -41,7 +46,7 @@ A vehicle with a fixed fare that ignores fuel prices needs just one row: `"fares
   is fine for a city site with normal traffic. If traffic grows, switch to a tile provider in `src/components/RouteMap.jsx`.
 - The road distance comes from an OSRM route service. By default this is the free public demo server
   (`router.project-osrm.org`), which has no uptime guarantee. For production, self-host OSRM or use another
-  OSRM-compatible service and set `VITE_ROUTING_URL` in `.env`.
+  OSRM-compatible service and set `VITE_ROUTING_URL` (in `.env` locally, and in Vercel's environment variables).
 - The two pin locations are sent to that service to measure the route. Nothing else is sent.
 - If the service fails or takes over 8 seconds, the page uses the straight-line distance, draws a dashed line,
   and labels the fare "At least". Commuters can always switch to "Type the distance instead".
